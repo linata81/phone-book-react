@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route, Link} from 'react-router-dom';
+import Contacts from './components/Contacts';
+import AddContact from './components/AddContact';
+import EditContact from './components/EditContact';
+import styles from './App.module.scss';
 
-function App() {
+const App: React.FC = () => {
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className={styles.wrapper}>
+        <div className={styles.logo}>
+          <Link to="/">Phone book</Link>
+        </div>
+        <Routes>
+          <Route path='/' element={<Contacts/>}/>
+          <Route path='/add-contact' element={<AddContact/>}/>
+          <Route path='/edit-contact/:id' element={<EditContact/>}/>
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
