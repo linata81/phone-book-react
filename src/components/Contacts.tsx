@@ -19,7 +19,7 @@ const Contacts:React.FC = () => {
         <span className="material-icons">person_add</span>
         Создать контакт
       </Link>
-      <ContactsList contacts={[{name: 'Алина', surname: 'Lysak', phone: 123123, id:'dsd', favorit:true},{name: 'Алина', surname: 'Lysak', phone: 123123, id:'id0', favorit:true}]}/>
+      {/* <ContactsList /> */}
       <FilterButtons/>
     </div>
   );
