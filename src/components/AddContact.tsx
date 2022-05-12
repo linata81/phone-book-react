@@ -1,7 +1,8 @@
-import React, {FocusEvent} from 'react';
-// import { ContactsContext } from '../context/contactsContext';
+import React, {FocusEvent, useContext, useState} from 'react';
 import InputMask from "react-input-mask";
 import {useForm, Controller} from 'react-hook-form';
+import { ContactsContext } from '../context/contactsContext';
+import { Navigate, Link } from 'react-router-dom';
 import styles from '../App.module.scss';
 
 type FormValues = {
@@ -12,12 +13,20 @@ type FormValues = {
 
 const AddContact:React.FC = () => {
   const{control, handleSubmit, register} = useForm<FormValues>();
- 
+  const props = useContext(ContactsContext);
+  const [formIsSent, setFormIsSent] = useState(false);
   
   const onSubmit = (data: FormValues) => {
-    
+    const newContact = {
+      ...data,
+      favorit: false
+    }
     if(data.phone.indexOf("_") === -1) {
-      console.log(data);
+      if(props) {
+        const {addItem} = props;
+        addItem(newContact);
+        setFormIsSent(prev => !prev);
+      }
     }
   }
   
@@ -28,11 +37,20 @@ const AddContact:React.FC = () => {
       e.target.setSelectionRange(errInd,errInd);
     }
   }
+  
+  if(formIsSent){
+    return (<Navigate to={'/'}/>)
+  }
  
   return (
     <div className={styles.card}>
       <form className={styles.cardForm} onSubmit={handleSubmit(onSubmit)}>
-        <h1>Создать контакт</h1>
+        <div className='flex'>
+          <Link to="/">
+            <span className="material-icons pt-1">close</span>
+          </Link>
+          <h1>Создать контакт</h1>          
+        </div>
         <input
           {...register("name")}
           placeholder='Имя'
@@ -41,7 +59,6 @@ const AddContact:React.FC = () => {
         <input
           {...register("surname")}
           placeholder='Фамилия'
-          required
         />
         <Controller
           control={control}

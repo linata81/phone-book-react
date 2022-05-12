@@ -1,7 +1,7 @@
 export interface IContact {
-  // id:string
+  id?:string
   name: string
   surname?:string
-  phone: number
+  phone: string
   favorit: boolean
 }
