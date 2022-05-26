@@ -1,41 +1,30 @@
-import React, {FocusEvent, useContext, useState} from 'react';
-import InputMask from "react-input-mask";
-import {useForm, Controller} from 'react-hook-form';
+import React, {useContext, useState} from 'react';
+import {useForm} from 'react-hook-form';
 import { ContactsContext } from '../context/contactsContext';
 import { Navigate, Link } from 'react-router-dom';
 import styles from '../App.module.scss';
+import PhoneNumberInput from './PhoneNumberInput';
 
 type FormValues = {
+  id: string;
   name: string;
   surname: string;
   phone: string;
 };
 
 const AddContact:React.FC = () => {
-  const{control, handleSubmit, register} = useForm<FormValues>();
-  const props = useContext(ContactsContext);
+  const {handleSubmit, register} = useForm<FormValues>();
   const [formIsSent, setFormIsSent] = useState(false);
+  const {addContact} = useContext(ContactsContext);
+  const {ref} = register("phone");
   
   const onSubmit = (data: FormValues) => {
     const newContact = {
       ...data,
       favorit: false
     }
-    if(data.phone.indexOf("_") === -1) {
-      if(props) {
-        const {addItem} = props;
-        addItem(newContact);
-        setFormIsSent(prev => !prev);
-      }
-    }
-  }
-  
-  const checkNumber = (e:FocusEvent<HTMLInputElement>) => {
-    const errInd = e.target.value.indexOf("_");
-    if(errInd !== -1) {
-      e.target.focus();
-      e.target.setSelectionRange(errInd,errInd);
-    }
+    addContact(newContact);
+    setFormIsSent(prev => !prev);
   }
   
   if(formIsSent){
@@ -46,7 +35,7 @@ const AddContact:React.FC = () => {
     <div className={styles.card}>
       <form className={styles.cardForm} onSubmit={handleSubmit(onSubmit)}>
         <div className='flex'>
-          <Link to="/">
+          <Link to="/" className={styles.linkBack}>
             <span className="material-icons pt-1">close</span>
           </Link>
           <h1>Создать контакт</h1>          
@@ -60,20 +49,7 @@ const AddContact:React.FC = () => {
           {...register("surname")}
           placeholder='Фамилия'
         />
-        <Controller
-          control={control}
-          name="phone"
-          render={(ref) => (
-            <InputMask
-              {...register("phone")}
-              mask='+7 (999) 999-99-99'
-              required
-              type="tel"
-              placeholder='Телефон'
-              onBlur={checkNumber}
-            />
-          )}
-        />
+        <PhoneNumberInput {...register("phone")} ref={ref} />
         <button type='submit'>Сохранить</button>
       </form> 
     </div>

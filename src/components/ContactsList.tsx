@@ -11,7 +11,7 @@ const ContactsList:React.FC<ContactsProp> = ({contacts}) => {
   const elements = contacts.map(elem => {
     return (
       <li key={elem.id} className={styles.contactInfo}>
-        <Link to="">
+        <Link to={`contact-details/${elem.id}`}>
           <span className="material-icons">account_circle</span>
           <span>{elem.name}</span>
           <span><b>{elem.surname}</b></span>

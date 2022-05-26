@@ -4,11 +4,24 @@ import { IContact } from '../interfaces';
 export interface IContactContext {
   fetchContacts: () => void
   contacts: IContact[]
-  addItem: (contact:IContact) => void
+  addContact: (contact:IContact) => void
+  getContactById: (id: string) => IContact
+  editContact: (id: string, contact:IContact) => void
+  deleteContact:(id: string) => void
 }
 
 export const ContactsContext = createContext<IContactContext>({
   fetchContacts: () => {},
   contacts: [],
-  addItem: (contact) => {}
+  addContact: () => {},
+  getContactById: () => {
+    return {
+      id: '',
+      name: '',
+      phone: '',
+      favorit: false
+    }
+  },
+  editContact: () => {},
+  deleteContact: () => {}
 });

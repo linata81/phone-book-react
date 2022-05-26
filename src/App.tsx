@@ -3,7 +3,7 @@ import ContactsState from './context/ContactsState';
 import { BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import Contacts from './components/Contacts';
 import AddContact from './components/AddContact';
-import EditContact from './components/EditContact';
+import ContactDetails from './components/ContactDetails';
 import styles from './App.module.scss';
 
 const App: React.FC = () => {
@@ -18,7 +18,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path='/' element={<Contacts/>}/>
             <Route path='/add-contact' element={<AddContact/>}/>
-            <Route path='/edit-contact/:id' element={<EditContact/>}/>
+            <Route path='/contact-details/:id' element={<ContactDetails/>}/>
           </Routes>
         </div>
       </BrowserRouter>

@@ -1,19 +1,38 @@
 import React from 'react';
 import styles from '../App.module.scss';
 
-const FilterButtons:React.FC = () => {
+type FilterButtonsProps = {
+  setFilterFavorite: (status:boolean) => void
+  filter: boolean
+}
+
+const FilterButtons = ({setFilterFavorite, filter}:FilterButtonsProps) => {
+ 
+  if(filter) {
+    return (
+      <div className={styles.filterBtn}>
+        <button onClick={() => setFilterFavorite(false)} type='button'>
+          <span className="material-icons">people_alt</span>
+          <span>Контакты</span>
+        </button>
+        <button onClick={() => setFilterFavorite(true)} type='button' className='active'>
+          <span className="material-icons">star_outline</span>
+          <span>Избранные</span>
+        </button>
+      </div>
+    )
+  }
   return (
     <div className={styles.filterBtn}>
-      <button type='button' className='active'>
+      <button onClick={() => setFilterFavorite(false)} type='button' className='active'>
         <span className="material-icons">people_alt</span>
         <span>Контакты</span>
       </button>
-      <button type='button'>
+      <button onClick={() => setFilterFavorite(true)} type='button'>
         <span className="material-icons">star_outline</span>
         <span>Избранные</span>
       </button>
-      {/* className={elem.name !== filterStatus ? "btn btn-light" : "btn btn-light active"} */}
-  </div>
+    </div>
   );
 }
 
