@@ -80,7 +80,7 @@ const ContactsState:React.FC<ContactsStateProps> = ({children}) => {
       addContact,
       getContactById,
       editContact,
-      deleteContact
+      deleteContact,
     }}>
       {children}
     </ContactsContext.Provider>

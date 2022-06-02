@@ -5,11 +5,11 @@
   @apply font-serif text-5xl font-bold mx-auto my-5;
 }
 .card {
-  @apply h-4/5 bg-white w-1/4 mx-auto rounded-3xl p-8 overflow-hidden flex flex-col
+  @apply h-4/6 bg-white w-1/4 mx-auto rounded-3xl p-8 overflow-hidden flex flex-col
   items-center relative shadow-md;
   
   .search {
-    @apply w-full py-3 px-5 bg-teal-200 block rounded-full outline-none placeholder:text-black;
+    @apply w-full py-3 pl-5 pr-10 bg-teal-200 block rounded-full outline-none placeholder:text-black;
   }
 }
 .cardLink {
@@ -17,7 +17,8 @@
 }
 .contactList {
   @apply flex flex-col w-full overflow-y-auto;
-  height: 445px;
+  height: 340px;
+
 }
 .contactInfo {
   @apply py-1 border-b-2 border-b-transparent hover:border-b-teal-200 transition-all
@@ -55,8 +56,9 @@
   }
 }
 .linkBack {
-  @apply hover:text-teal-300;
+  @apply hover:text-teal-300 flex;
 }
+
 .modal {
   @apply w-5/6 absolute inset-x-1/2 top-1/3 translate-x-[-50%]
    bg-purple-100 flex flex-col items-center justify-center
@@ -68,3 +70,4 @@
     @apply w-24 ml-3 bg-purple-300 rounded-md p-0.5 hover:bg-purple-400;
   }
 }
+

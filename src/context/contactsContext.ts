@@ -23,5 +23,5 @@ export const ContactsContext = createContext<IContactContext>({
     }
   },
   editContact: () => {},
-  deleteContact: () => {}
+  deleteContact: () => {},
 });
