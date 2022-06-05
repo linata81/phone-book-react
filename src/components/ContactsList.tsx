@@ -4,11 +4,10 @@ import styles from "../App.module.scss";
 import { IContact } from "../interfaces";
 
 interface ContactsListProps {
-  contacts : IContact[] 
+  contacts: IContact[];
 }
 
-const ContactsList: React.FC<ContactsListProps>= ({ contacts }) => {
-
+const ContactsList: React.FC<ContactsListProps> = ({ contacts }) => {
   const elements = contacts.map((elem, index) => {
     return (
       <li key={index} className={styles.contactInfo}>
@@ -23,11 +22,7 @@ const ContactsList: React.FC<ContactsListProps>= ({ contacts }) => {
     );
   });
 
-  return (
-    <ul className={styles.contactList}>
-      {elements}
-    </ul>
-  );
+  return <ul className={styles.contactList}>{elements}</ul>;
 };
 
 export default ContactsList;
